@@ -26,9 +26,6 @@ class StochasticAgent(nn.Module):
         self.linear4 = nn.Linear(hidden_arr[2],hidden_arr[3])
         self.linear5 = nn.Linear(hidden_arr[3]+3,outputs)
 
-            
-    # Called with either one element to determine next action, or a batch
-    # during optimization. Returns tensor([[left0exp,right0exp]...]).
     def forward(self, img,dim):
         # if we want raw dimensions of box  
         # print(img.shape,dim.shape)
@@ -37,12 +34,26 @@ class StochasticAgent(nn.Module):
         x = F.relu(self.linear3(x))
         x = F.relu(self.linear4(x))
         z = torch.cat((x,dim),dim=1)
-        print(x)
         out = self.linear5(z)
         return out
 
 
+class DeterministicPolicy(nn.Module):
+    def __init__(self, num_inputs, num_actions, hidden_dim):
+        super(DeterministicPolicy, self).__init__()
+        self.linear1 = nn.Linear(num_inputs, hidden_dim)
+        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
 
+        self.mean = nn.Linear(hidden_dim, num_actions)
+        self.noise = torch.Tensor(num_actions)
+
+        self.apply(weights_init_)
+
+    def forward(self, state):
+        x = F.relu(self.linear1(state))
+        x = F.relu(self.linear2(x))
+        mean = torch.tanh(self.mean(x))
+        return mean
 
 class QNetwork(nn.Module):
     '''

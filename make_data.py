@@ -99,9 +99,10 @@ class BoxMaker():
             i = boxes[m][3]
             j = boxes[m][4]
             k = boxes[m][5]
+            ldc_flatten = ldc.flatten()
+            data.append([ldc_flatten, np.array([l,b,h]), np.array([i,j,k])])
             ldc[i:i+b,j:j+l] += h
-            ldc_flatten = np.flatten(ldc)
-            data.append([[ldc_flatten,],[i,j,k]])
+        return data
 
 if __name__ == "__main__":
     import shutil
@@ -112,16 +113,17 @@ if __name__ == "__main__":
         os.makedirs('./Box_data')
 
     data_maker = BoxMaker()
-    boxes = data_maker.get_boxes()
-    ldc = np.zeros((45,80))
-    ldc_ht = 45
-    for m in range(len(boxes)):
-        l = boxes[m][0]
-        b = boxes[m][1]
-        h = boxes[m][2]
-        i = boxes[m][3]
-        j = boxes[m][4]
-        k = boxes[m][5]
-        ldc[i:i+b,j:j+l] += h
-        plt.imshow(ldc,cmap='hot',vmin=0,vmax=ldc_ht)
-        plt.savefig('Box_data/state_'+str(m)+'.jpg')
+    # boxes = data_maker.get_boxes()
+    # ldc = np.zeros((45,80))
+    # ldc_ht = 45
+    # for m in range(len(boxes)):
+    #     l = boxes[m][0]
+    #     b = boxes[m][1]
+    #     h = boxes[m][2]
+    #     i = boxes[m][3]
+    #     j = boxes[m][4]
+    #     k = boxes[m][5]
+    #     ldc[i:i+b,j:j+l] += h
+    #     plt.imshow(ldc,cmap='hot',vmin=0,vmax=ldc_ht)
+    #     plt.savefig('Box_data/state_'+str(m)+'.jpg')
+    print(np.array(data_maker.get_data_dict()))
