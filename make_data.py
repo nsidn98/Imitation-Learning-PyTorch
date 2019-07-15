@@ -9,10 +9,11 @@ class BoxMaker():
     '''
     To make expert data set for solving 3D tetris
     '''
-    def __init__(self,ldc_ht=45,ldc_wid=45,ldc_len=80):
+    def __init__(self,ldc_ht=45,ldc_wid=45,ldc_len=80,print=0):
         self.ldc_ht  = ldc_ht
         self.ldc_wid = ldc_wid
         self.ldc_len = ldc_len
+        self.print = print
 
     def get_coords(self,ldc_len,min_len,_range):
         nhs = []
@@ -59,7 +60,8 @@ class BoxMaker():
                       2:'Wall Building Length',
                       3:'Wall Building Breadth',
                       }
-        print('Building Choice is: ',build_dict[building_choice])
+        if self.print:
+            print('Building Choice is: ',build_dict[building_choice])
 
         boxes=[]
         if building_choice == floor_building_breadth:
