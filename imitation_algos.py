@@ -39,8 +39,8 @@ class BehaviouralCloning():
     def shift_action(self,action):
         x = action[:,0]
         y = action[:,1]
-        x = x*self.ldc_len/2 +self.ldc_len/2
-        y = y*self.ldc_wid/2 +self.ldc_wid/2
+        y = y*self.ldc_len/2 +self.ldc_len/2
+        x = x*self.ldc_wid/2 +self.ldc_wid/2
         return x,y
 
     def train(self):
