@@ -60,7 +60,7 @@ class BehaviouralCloning():
         self.num_actions = 2
         self.input_size = self.ldc_len*self.ldc_wid
         self.data_maker = BoxMaker(self.ldc_ht,self.ldc_wid,self.ldc_len)
-        self.policy = StochasticPolicyCNN(self.input_size, self.num_actions)
+        self.policy = StochasticPolicyCNN()
         if args.tensorboard:
             print('Init tensorboardX')
             self.writer = SummaryWriter(log_dir='runs/{}'.format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")))
