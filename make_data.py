@@ -90,7 +90,7 @@ class BoxMaker():
         
         return boxes
     
-    def get_data_dict(self):
+    def get_data_dict(self,flatten=True):
         ldc = np.zeros((self.ldc_wid,self.ldc_len))
         boxes = self.get_boxes()
         data = []
@@ -101,7 +101,10 @@ class BoxMaker():
             i = boxes[m][3]
             j = boxes[m][4]
             k = boxes[m][5]
-            ldc_flatten = ldc.flatten()
+            if flatten:
+                ldc_flatten = ldc.flatten()
+            else:
+                ldc_flatten = np.copy(ldc)
             data.append([ldc_flatten, np.array([l,b,h]), np.array([i,j,k])])
             ldc[i:i+b,j:j+l] += h
         return data

@@ -15,6 +15,8 @@ parser.add_argument('--load_model', type=int, default=0,
                     help='bool to load model from pre-trained weights')
 parser.add_argument('--tensorboard', type=int, default=1, 
                     help='Whether we want tensorboardX logging')
+parser.add_argument('--batch_size', type=int, default=64, 
+                    help='batch size to sample')
 
 
 
