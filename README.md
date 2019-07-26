@@ -19,3 +19,6 @@ Basic Behavioural Cloning and DAgger Implementation in PyTorch
 * Make it compatible with OpenAI gym environments
 * Add supporting algorithms to train further with Reinforcement Learning
 * Comments in the code :P
+
+#### For tensorboard:
+`tensorboard --logdir=runs --host localhost --port 8088`
